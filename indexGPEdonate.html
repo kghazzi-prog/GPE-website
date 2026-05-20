@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Donate — Foundation for Global Political Exchange</title>
+  <link rel="icon" type="image/png" href="photos/GPE favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+
+    :root {
+      --clr-darkest:    #001B2B;
+      --clr-dark:       #023D59;
+      --clr-mid:        #05638C;
+      --clr-light:      #0A87BE;
+      --clr-cyan:       #10ABEF;
+      --clr-cyan-soft:  #82CFFE;
+      --clr-cyan-pale:  #D9F0FF;
+      --clr-indigo:     #103CEF;
+      --clr-mint:       #10EFC3;
+      --clr-mint-soft:  #0BC39F;
+      --clr-bg:         #ffffff;
+      --clr-bg-alt:     #F0F6FF;
+      --clr-text:       #191B1C;
+      --clr-text-mid:   #383B3D;
+      --clr-text-muted: #595F61;
+      --clr-border:     #C2C9CC;
+      --clr-border-lt:  #DDE2E6;
+
+      --t-xs:   0.75rem;
+      --t-sm:   0.875rem;
+      --t-base: 1rem;
+      --t-lg:   1.125rem;
+      --t-xl:   1.375rem;
+      --t-2xl:  1.75rem;
+      --t-3xl:  2.25rem;
+      --t-hero: 3rem;
+
+      --sp-1: 8px;  --sp-2: 16px; --sp-3: 24px; --sp-4: 32px;
+      --sp-5: 48px; --sp-6: 64px; --sp-7: 80px;
+
+      --max-w: 1080px;
+      --section-pad: var(--sp-7) var(--sp-5);
+      --radius: 4px;
+
+      --font-display: 'Noto Sans Display', Arial, sans-serif;
+      --font-ui:      'Inter', Arial, sans-serif;
+      --font-body:    Georgia, 'Times New Roman', serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    [id] { scroll-margin-top: 56px; }
+    body { font-family: var(--font-body); font-size: var(--t-base); color: var(--clr-text); background: var(--clr-bg); line-height: 1.7; }
+    h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.2; }
+    a { color: inherit; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img { display: block; max-width: 100%; }
+
+    /* TOP BAR */
+    .top-bar { background: var(--clr-darkest); color: var(--clr-cyan-pale); font-family: var(--font-ui); font-size: var(--t-xs); padding: 8px var(--sp-5); display: flex; justify-content: flex-end; align-items: center; gap: var(--sp-4); letter-spacing: 0.04em; }
+    .top-bar a { color: var(--clr-cyan-pale); transition: color 0.2s; }
+    .top-bar a:hover { color: var(--clr-cyan); text-decoration: none; }
+    .top-bar .top-divider { width: 1px; height: 12px; background: rgba(255,255,255,0.2); }
+
+    /* NAV */
+    nav { background: var(--clr-dark); padding: 0 var(--sp-5); position: relative; }
+    .nav-inner { display: flex; align-items: center; }
+    nav ul { list-style: none; display: flex; flex-wrap: wrap; }
+    nav ul li a { display: block; padding: 18px 14px; color: var(--clr-cyan-pale); font-family: var(--font-ui); font-size: var(--t-xs); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; transition: background 0.2s, color 0.2s; white-space: nowrap; }
+    nav ul li a:hover, nav ul li a.active { background: var(--clr-cyan); color: var(--clr-dark); text-decoration: none; }
+    .donate-link a { background: none; color: var(--clr-cyan-pale) !important; font-weight: 600; }
+    .burger { display: none; flex-direction: column; justify-content: center; gap: 6px; background: none; border: none; cursor: pointer; padding: 16px 4px; margin-left: auto; }
+    .burger span { display: block; width: 24px; height: 2px; background: var(--clr-cyan-pale); border-radius: 2px; transition: transform 0.28s ease, opacity 0.2s ease; }
+    .burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+    .burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+
+    /* PAGE NAV */
+    .page-nav { background: #fff; border-top: 3px solid var(--clr-cyan); border-bottom: 1px solid var(--clr-border-lt); padding: 0 var(--sp-5); display: flex; align-items: center; overflow-x: auto; scrollbar-width: none; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+    .page-nav::-webkit-scrollbar { display: none; }
+    .page-nav-inner { display: flex; align-items: center; max-width: var(--max-w); margin: 0 auto; width: 100%; }
+    .page-nav a { display: block; padding: 13px 18px; font-family: var(--font-ui); font-size: var(--t-xs); font-weight: 600; color: var(--clr-text-mid); letter-spacing: 0.04em; white-space: nowrap; text-decoration: none; border-bottom: 3px solid transparent; margin-bottom: -1px; transition: color 0.2s, border-color 0.2s; }
+    .page-nav a:hover { color: var(--clr-dark); border-bottom-color: var(--clr-cyan); text-decoration: none; }
+    .page-nav a.active { color: var(--clr-dark); border-bottom-color: var(--clr-cyan); font-weight: 700; }
+
+    /* HERO IMAGE */
+    .hero-image-wrap { width: 100%; overflow: hidden; line-height: 0; }
+    .hero-image-wrap img { width: 100%; height: auto; display: block; }
+
+    /* NEWS TICKER */
+    .news-ticker { background: #F8F6F2; height: 38px; display: flex; align-items: stretch; overflow: hidden; position: relative; border-bottom: 1px solid var(--clr-border); }
+    .ticker-label { flex-shrink: 0; background: var(--clr-darkest); color: #fff; font-family: var(--font-ui); font-size: var(--t-xs); font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; margin-left: var(--sp-5); padding: 0 14px; display: flex; align-items: center; gap: 8px; z-index: 2; white-space: nowrap; }
+    .ticker-label::after { content: ''; position: absolute; left: calc(100% - 1px); top: 0; bottom: 0; width: 0; height: 0; border-top: 38px solid transparent; border-left: 14px solid var(--clr-darkest); }
+    .ticker-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--clr-mint); animation: blink 1.2s ease-in-out infinite; }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+    .ticker-track { flex: 1; overflow: hidden; display: flex; align-items: center; padding-left: 24px; mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%); }
+    .ticker-scroll { display: flex; align-items: center; white-space: nowrap; animation: ticker-move 28s linear infinite; }
+    .ticker-scroll:hover { animation-play-state: paused; }
+    @keyframes ticker-move { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .ticker-item { font-family: var(--font-ui); font-size: var(--t-sm); font-weight: 600; color: var(--clr-darkest); padding-right: 64px; }
+    .ticker-item a { color: var(--clr-darkest); border-bottom: 1px solid rgba(0,27,43,0.3); }
+    .ticker-item a:hover { color: var(--clr-dark); text-decoration: none; }
+    .ticker-sep { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: rgba(0,27,43,0.35); margin-right: 64px; vertical-align: middle; flex-shrink: 0; }
+
+    /* HERO */
+    .hero { position: relative; overflow: hidden; color: #fff; background: var(--clr-dark); min-height: 320px; display: flex; align-items: center; justify-content: center; }
+    .hero-text-wrap { display: flex; align-items: center; justify-content: center; text-align: center; padding: var(--sp-6) var(--sp-5); width: 100%; }
+    .hero-inner { max-width: 820px; }
+    .hero .tagline { font-family: var(--font-ui); font-size: var(--t-xs); font-weight: 600; color: var(--clr-cyan); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: var(--sp-3); }
+    .hero h1 { font-size: var(--t-hero); font-weight: 700; line-height: 1.15; color: #fff; margin-bottom: var(--sp-4); text-shadow: 0 2px 20px rgba(0,0,0,0.4); }
+    .hero .sub { font-family: var(--font-ui); font-size: var(--t-lg); color: rgba(255,255,255,0.75); line-height: 1.5; }
+
+    .btn { display: inline-block; padding: 14px 32px; font-family: var(--font-ui); font-size: var(--t-sm); font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; border: 2px solid var(--clr-cyan); color: var(--clr-cyan); border-radius: var(--radius); transition: background 0.2s, color 0.2s, border-color 0.2s; }
+    .btn:hover { background: var(--clr-cyan); color: var(--clr-dark); text-decoration: none; }
+    .btn-solid { background: var(--clr-cyan); color: var(--clr-dark); }
+    .btn-solid:hover { background: var(--clr-cyan-soft); border-color: var(--clr-cyan-soft); }
+    .btn-mint { background: var(--clr-mint); color: var(--clr-dark); border-color: var(--clr-mint); }
+    .btn-mint:hover { background: var(--clr-mint-soft); border-color: var(--clr-mint-soft); }
+    .btn-lg { padding: 18px 48px; font-size: var(--t-base); }
+
+    /* SECTION UTILITIES */
+    .section-wrap { padding: var(--section-pad); }
+    .section-inner { max-width: var(--max-w); margin: 0 auto; }
+    .section-label { font-family: var(--font-ui); font-size: var(--t-xs); font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--clr-cyan); margin-bottom: var(--sp-2); display: block; }
+    h2.section-title { font-size: var(--t-3xl); font-weight: 900; color: var(--clr-dark); margin-bottom: var(--sp-3); }
+    .accent-line { width: 48px; height: 3px; background: var(--clr-cyan); margin-bottom: var(--sp-4); border-radius: 2px; }
+    .bg-alt { background: var(--clr-bg-alt); }
+
+    /* DONATE CTA BAND */
+    .donate-band {
+      background: linear-gradient(135deg, var(--clr-darkest) 0%, var(--clr-dark) 100%);
+      padding: var(--sp-7) var(--sp-5);
+      text-align: center;
+    }
+    .donate-band h2 { font-family: var(--font-display); font-size: var(--t-3xl); font-weight: 900; color: #fff; margin-bottom: var(--sp-3); }
+    .donate-band p { font-family: var(--font-ui); font-size: var(--t-base); color: var(--clr-cyan-pale); max-width: 640px; margin: 0 auto var(--sp-5); line-height: 1.7; }
+
+    /* BLOCKQUOTE */
+    .pull-quote {
+      border-left: 4px solid var(--clr-cyan);
+      padding: var(--sp-3) var(--sp-4);
+      background: var(--clr-bg-alt);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: var(--sp-4) 0;
+    }
+    .pull-quote p { font-family: var(--font-body); font-size: var(--t-lg); color: var(--clr-dark); font-style: italic; line-height: 1.7; margin: 0 0 var(--sp-1); }
+    .pull-quote cite { font-family: var(--font-ui); font-size: var(--t-xs); font-weight: 700; color: var(--clr-text-muted); font-style: normal; letter-spacing: 0.05em; }
+
+    /* IMPACT STATS */
+    .impact-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--sp-4); margin: var(--sp-5) 0; }
+    .impact-card { background: var(--clr-dark); border-radius: var(--radius); padding: var(--sp-4) var(--sp-3); text-align: center; }
+    .impact-number { font-family: var(--font-display); font-size: var(--t-3xl); font-weight: 900; color: var(--clr-cyan); line-height: 1; }
+    .impact-label { font-family: var(--font-ui); font-size: var(--t-xs); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-top: 6px; }
+
+    /* OBJECTIVES LIST */
+    .objectives-list { list-style: none; display: flex; flex-direction: column; gap: var(--sp-3); margin-top: var(--sp-4); }
+    .objectives-list li { display: flex; align-items: flex-start; gap: var(--sp-2); }
+    .objectives-list li::before { content: ''; flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background: var(--clr-mint); margin-top: 8px; }
+    .objectives-list li span { font-family: var(--font-body); font-size: var(--t-base); color: var(--clr-text-mid); line-height: 1.75; }
+
+    /* TESTIMONIALS */
+    .testimonials-section { background: var(--clr-dark); padding: var(--section-pad); }
+    .testimonials-section h2.section-title { color: #fff; }
+    .testimonials-section .section-label { color: var(--clr-cyan-soft); }
+    .testimonials-section .accent-line { background: var(--clr-cyan); }
+    .testimonial-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--sp-3); margin-top: var(--sp-5); }
+    .testimonial-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-top: 3px solid var(--clr-indigo); padding: var(--sp-4) var(--sp-3); border-radius: var(--radius); display: flex; flex-direction: column; justify-content: space-between; transition: background 0.2s; }
+    .testimonial-card:hover { background: rgba(255,255,255,0.08); }
+    .testimonial-quote-mark { font-family: Georgia, serif; font-size: 3rem; color: var(--clr-indigo); opacity: 0.6; line-height: 1; margin-bottom: var(--sp-1); }
+    .testimonial-card blockquote { font-family: var(--font-body); font-size: var(--t-sm); color: rgba(255,255,255,0.82); font-style: italic; line-height: 1.7; margin-bottom: var(--sp-3); flex: 1; }
+    .testimonial-attribution { display: flex; align-items: center; gap: var(--sp-2); }
+    .avatar-placeholder { flex-shrink: 0; width: 56px; height: 56px; border-radius: 50%; background: rgba(255,255,255,0.08); border: 2px solid rgba(16,171,239,0.4); overflow: hidden; position: relative; }
+    .avatar-placeholder img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center center; }
+    .testimonial-card cite { font-family: var(--font-ui); font-size: var(--t-xs); font-weight: 700; color: rgba(255,255,255,0.9); font-style: normal; letter-spacing: 0.04em; }
+    .testimonial-card cite .role { font-weight: 400; color: rgba(255,255,255,0.5); }
+
+    /* NEWSLETTER */
+    .newsletter { background: linear-gradient(135deg, var(--clr-dark) 0%, var(--clr-mid) 100%); color: #fff; text-align: center; padding: var(--sp-7) var(--sp-5); }
+    .newsletter h2.section-title { color: #fff; margin-bottom: var(--sp-2); }
+    .newsletter p { color: var(--clr-cyan-pale); margin-bottom: var(--sp-4); font-family: var(--font-ui); font-size: var(--t-base); }
+    .newsletter-form { display: flex; gap: var(--sp-1); justify-content: center; flex-wrap: wrap; max-width: 480px; margin: 0 auto; }
+    .newsletter-form input[type="email"] { flex: 1; min-width: 220px; padding: 14px var(--sp-2); border: none; border-radius: var(--radius) 0 0 var(--radius); font-family: var(--font-ui); font-size: var(--t-sm); outline: none; }
+    .newsletter-form button { padding: 14px var(--sp-4); background: var(--clr-cyan); color: var(--clr-dark); border: none; border-radius: 0 var(--radius) var(--radius) 0; font-family: var(--font-ui); font-size: var(--t-xs); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+    .newsletter-form button:hover { background: var(--clr-cyan-soft); }
+
+    /* CONTACT */
+    .contact-section { background: var(--clr-bg); padding: var(--section-pad); text-align: center; }
+    .contact-section h2.section-title { margin-bottom: var(--sp-3); }
+    .contact-info { font-family: var(--font-ui); font-size: var(--t-base); color: var(--clr-text-mid); line-height: 2; }
+    .contact-info a { color: var(--clr-dark); font-weight: 600; }
+    .contact-info a:hover { color: var(--clr-cyan); }
+    .contact-info p { margin-bottom: var(--sp-2); }
+
+    /* FOOTER */
+    footer { background: var(--clr-dark); color: rgba(255,255,255,0.5); padding: var(--sp-5) var(--sp-5) var(--sp-4); font-family: var(--font-ui); font-size: var(--t-xs); }
+    .footer-inner { max-width: var(--max-w); margin: 0 auto; display: flex; flex-direction: column; gap: var(--sp-3); }
+    .footer-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: var(--sp-4); padding-bottom: var(--sp-3); border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .footer-brand { max-width: 340px; }
+    .footer-brand strong { display: block; font-size: var(--t-sm); color: rgba(255,255,255,0.85); font-weight: 700; margin-bottom: 6px; }
+    .footer-links { display: flex; flex-direction: column; gap: 6px; }
+    .footer-links a { color: rgba(255,255,255,0.55); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--clr-cyan); text-decoration: none; }
+    .footer-social { display: flex; gap: var(--sp-3); flex-wrap: wrap; }
+    .footer-social a { color: rgba(255,255,255,0.55); transition: color 0.2s; }
+    .footer-social a:hover { color: var(--clr-cyan); text-decoration: none; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--sp-2); font-size: var(--t-xs); color: rgba(255,255,255,0.35); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      :root { --section-pad: 56px 32px; --t-hero: 2.4rem; }
+      .impact-grid { grid-template-columns: repeat(2,1fr); }
+      .testimonial-grid { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 640px) {
+      :root { --section-pad: 48px 20px; --t-hero: 2rem; --t-3xl: 1.75rem; }
+      .burger { display: flex; }
+      nav ul { display: none; flex-direction: column; width: 100%; background: var(--clr-dark); border-top: 1px solid rgba(255,255,255,0.08); }
+      nav ul.open { display: flex; }
+      nav ul li { width: 100%; }
+      nav ul li a { padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+      .top-bar { justify-content: center; flex-wrap: wrap; gap: var(--sp-2); }
+      .top-bar .top-divider { display: none; }
+      .impact-grid { grid-template-columns: 1fr; }
+      .testimonial-grid { grid-template-columns: 1fr; }
+      .newsletter-form input[type="email"], .newsletter-form button { border-radius: var(--radius); }
+      .footer-top { flex-direction: column; }
+      .page-nav { padding: 0 var(--sp-2); }
+      .page-nav a { padding: 12px 12px; font-size: 0.7rem; }
+    }
+    @media (min-width: 641px) { .burger { display: none !important; } }
+
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <a href="mailto:info@globalpoliticalexchange.org">info@globalpoliticalexchange.org</a>
+    <span class="top-divider"></span>
+    <a href="tel:+96181797943">+961.81.797.943</a>
+    <span class="top-divider"></span>
+    <a href="https://wa.me/96181797943">WhatsApp</a>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="nav-inner">
+      <ul id="navLinks">
+        <li><a href="https://www.globalpoliticalexchange.org/">Home</a></li>
+        <li><a href="https://www.globalpoliticalexchange.org/beirut">Beirut Exchange</a></li>
+        <li><a href="https://www.globalpoliticalexchange.org/tunis">Tunis Exchange</a></li>
+        <li><a href="https://www.globalpoliticalexchange.org/armenia">Armenia Exchange</a></li>
+        <li><a href="https://www.globalpoliticalexchange.org/libya">Libya Exchange</a></li>
+        <li><a href="https://www.globalpoliticalexchange.org/yemen">Yemen Exchange</a></li>
+        <li><a href="https://www.globalpoliticalexchange.org/erbil">Erbil Exchange</a></li>
+        <li><a href="https://www.globalpoliticalexchange.org/team">Our Team</a></li>
+        <li><a href="https://www.globalpoliticalexchange.org/learn-arabic">Learn Arabic In Tunis</a></li>
+        <li class="donate-link"><a href="https://www.globalpoliticalexchange.org/donate" class="active">Donate</a></li>
+      </ul>
+      <button class="burger" id="burgerBtn" onclick="toggleMobileMenu()" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- SECONDARY PAGE NAV -->
+  <nav class="page-nav" aria-label="Page sections">
+    <div class="page-nav-inner">
+      <a href="#legal">First Amendment Lawsuit</a>
+      <a href="#donate-now">Donate Now</a>
+      <a href="#scholarships">Scholarship Fund</a>
+      <a href="#about">About The Exchange</a>
+      <a href="#testimonials">Testimonials</a>
+    </div>
+  </nav>
+
+  <!-- HERO IMAGE -->
+  <div class="hero-image-wrap">
+    <img src="photos/Exchange background photo mosaic.jpg" alt="The Exchange Foundation">
+  </div>
+
+  <!-- NEWS TICKER -->
+  <div class="news-ticker">
+    <div class="ticker-label"><span class="ticker-dot"></span>Latest</div>
+    <div class="ticker-track">
+      <div class="ticker-scroll">
+        <span class="ticker-item"><a href="https://www.justsecurity.org/94412/talking-to-the-enemy-shouldnt-be-illegal/" target="_blank" rel="noopener noreferrer">&ldquo;Talking To &lsquo;The Enemy&rsquo; Shouldn&rsquo;t Be Illegal&rdquo;</a> &nbsp;&#183;&nbsp; Lawsuit Announcement</span>
+        <span class="ticker-sep"></span>
+        <span class="ticker-item"><a href="https://www.justsecurity.org/105426/treasury-reversal-sanctions-free-speech/" target="_blank" rel="noopener noreferrer">Treasury&rsquo;s Reversal on Sanctions Authority Is a Victory for Free Speech</a></span>
+        <span class="ticker-sep"></span>
+        <span class="ticker-item"><a href="https://www.justsecurity.org/94412/talking-to-the-enemy-shouldnt-be-illegal/" target="_blank" rel="noopener noreferrer">&ldquo;Talking To &lsquo;The Enemy&rsquo; Shouldn&rsquo;t Be Illegal&rdquo;</a> &nbsp;&#183;&nbsp; Lawsuit Announcement</span>
+        <span class="ticker-sep"></span>
+        <span class="ticker-item"><a href="https://www.justsecurity.org/105426/treasury-reversal-sanctions-free-speech/" target="_blank" rel="noopener noreferrer">Treasury&rsquo;s Reversal on Sanctions Authority Is a Victory for Free Speech</a></span>
+        <span class="ticker-sep"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-text-wrap">
+      <div class="hero-inner">
+        <img src="photos/Logo GPE.png" alt="The Exchange Foundation" style="height:90px; width:auto; margin:0 auto var(--sp-3); display:block; filter:invert(1); mix-blend-mode:screen; opacity:0.95;">
+        <p class="tagline">Foundation for Global Political Exchange</p>
+        <h1>Donate to The Exchange Foundation</h1>
+        <p class="sub">Support free speech, open dialogue &amp; scholarship access across Western Asia &amp; North Africa</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FIRST AMENDMENT LAWSUIT -->
+  <div class="section-wrap" id="legal" style="background:var(--clr-bg);">
+    <div class="section-inner">
+      <span class="section-label">First Amendment</span>
+      <div class="accent-line"></div>
+      <h2 class="section-title">Support Our Effort to Challenge the US Government&rsquo;s Restriction of Free Speech</h2>
+
+      <p style="font-family:var(--font-body); font-size:var(--t-base); color:var(--clr-text-mid); line-height:1.8; margin-bottom:var(--sp-4);">On December 20, 2023, the Foundation for Global Political Exchange together with the Knight First Amendment Institute at Columbia University filed a lawsuit challenging the assertion by the Treasury Department&rsquo;s Office of Foreign Assets Control (OFAC) that it can restrict American groups from organizing political discussions that include people whom the government has sanctioned. The complaint argues that OFAC&rsquo;s position exceeds its statutory and regulatory authority and violates the First Amendment.</p>
+
+      <div class="pull-quote">
+        <p>&ldquo;Preventing an American organization from including disfavored speakers in political dialogue is a dangerous overreach by the government with enormous consequences for the global exchange of ideas. Americans have a right to engage with people and ideas from around the world, and the First Amendment protects their right to do so even when the government objects.&rdquo;</p>
+        <cite>&mdash; Alex Abdo, Litigation Director, Knight First Amendment Institute at Columbia University</cite>
+      </div>
+
+      <p style="font-family:var(--font-body); font-size:var(--t-base); color:var(--clr-text-mid); line-height:1.8; margin-bottom:var(--sp-4);">The Foundation for Global Political Exchange promotes professional and academic enrichment through convenings in the Middle East and North Africa called &ldquo;Exchanges.&rdquo; Each Exchange involves a series of small-group, immersive dialogues that allows participants from around the world to engage with and question key decision-makers from across the country&rsquo;s political spectrum. Since 2008, more than 1,500 people have attended Exchanges, including journalists, academics, students, NGO practitioners, and government officials from 51 different countries.</p>
+
+      <p style="font-family:var(--font-body); font-size:var(--t-base); color:var(--clr-text-mid); line-height:1.8; margin-bottom:var(--sp-4);">The Foundation convened the 21st Beirut Exchange in January 2023, where 15 participants from around the world gathered to engage with about 35 prominent figures in Lebanon. In advance of that Exchange, the Foundation informed OFAC that it intended to include five Lebanese political figures&mdash; some of whom are members of Lebanon&rsquo;s parliament&mdash;who are designated under a U.S. sanctions regime or members of a designated organization. Interpreting its authority broadly, OFAC prohibited the Foundation from including the speakers.</p>
+
+      <div class="pull-quote">
+        <p>&ldquo;We invited these prominent political figures to the 2023 Beirut Exchange because they are vital to understanding Lebanon&rsquo;s complicated political landscape and its role in global affairs,&rdquo; said Nicholas Noe, Director and Co-Founder of the Foundation for Global Political Exchange. &ldquo;Hearing from key decision-makers across the ideological spectrum is critical to finding pathways toward a sustainable peace.</p>
+        <p style="margin-top:var(--sp-2);">&ldquo;The OFAC ruling in our case is not only a clear and unwarranted abridgment of fundamental constitutional rights, it is also grossly out of step with US regulations and without precedent in US case law,&rdquo; said Joshua Andresen, Board member of the Exchange. &ldquo;Preventing Americans from speaking with those who hold views with which we disagree is antithetical to the durable peace solutions we so desperately need.&rdquo;</p>
+        <cite>&mdash; Nicholas Noe &amp; Joshua Andresen</cite>
+      </div>
+
+      <div class="pull-quote">
+        <p>&ldquo;Our complaint argues that OFAC&rsquo;s decision to block the Foundation from including designated speakers in its Exchanges exceeds OFAC&rsquo;s authority and violates the First Amendment by suppressing core political speech. If OFAC&rsquo;s interpretation of its regulatory authority holds, it could have enormous consequences for public discourse. Under the agency&rsquo;s interpretation, major media organizations would also be prohibited from publishing interviews with influential figures who are designated under U.S. sanctions law&mdash;which media organizations currently do routinely, particularly in their coverage of conflict regions.</p>
+        <p style="margin-top:var(--sp-2);">&ldquo;The government can&rsquo;t be allowed to dictate which voices Americans are permitted to hear from on issues of global politics,&rdquo; said Anna Diakun, staff attorney at the Knight Institute. &ldquo;The First Amendment was meant to keep this kind of authority out of the government&rsquo;s hands.&rdquo;</p>
+        <cite>&mdash; Anna Diakun, Staff Attorney, Knight First Amendment Institute at Columbia University</cite>
+      </div>
+
+      <p style="font-family:var(--font-body); font-size:var(--t-base); color:var(--clr-text-mid); line-height:1.8; margin-bottom:var(--sp-4);">The lawsuit asks the court to declare that OFAC&rsquo;s actions are unlawful and to prohibit the agency from preventing the Foundation from hosting discussions with speakers of its choosing in the future.</p>
+    </div>
+  </div>
+
+  <!-- DONATE CTA BAND -->
+  <div class="donate-band" id="donate-now">
+    <div style="max-width:760px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-5); align-items:start; text-align:left;">
+
+      <!-- Left column: text -->
+      <div>
+        <h2 style="font-size:var(--t-2xl); margin-bottom:var(--sp-3);">Support Our Effort to Challenge the US Government&rsquo;s Restriction of Free Speech</h2>
+        <p style="font-family:var(--font-ui); font-size:var(--t-sm); color:rgba(255,255,255,0.85); line-height:1.7; margin-bottom:var(--sp-3);">&bull; Your tax-deductible contribution to the Exchange Foundation will help support our effort to challenge the US Government&rsquo;s unconstitutional restriction of our First Amendment freedoms of speech and association when it ruled that we cannot convene critical discussions with certain individuals.</p>
+        <p style="font-family:var(--font-ui); font-size:var(--t-xs); color:rgba(255,255,255,0.55); line-height:1.6; margin-bottom:var(--sp-2);">Lawyers: Alex Abdo, Anna Diakun, Jameel Jaffer, Alexia Ramirez &amp; Xiangnong Wang (Knight Institute); Joshua Andresen (The Exchange Foundation).</p>
+        <p style="font-family:var(--font-ui); font-size:var(--t-xs); color:rgba(255,255,255,0.55); line-height:1.6;">The Knight First Amendment Institute defends the freedoms of speech and the press through strategic litigation, research, and public education. <a href="https://knightcolumbia.org/" target="_blank" rel="noopener noreferrer" style="color:var(--clr-mint);">knightcolumbia.org</a></p>
+      </div>
+
+      <!-- Right column: donate button + payment logos -->
+      <div style="display:flex; flex-direction:column; align-items:center; gap:var(--sp-3); padding-top:var(--sp-2);">
+        <a href="https://www.paypal.com/donate?token=uW8lkkX7zyHDdbZoj-q9MUGNaRsv9YDO2rxcFVb_ZM35_HG9Hyp5yq_VsHly1Ojtmj82mGghcpyBC7oA" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; justify-content:center; gap:10px; width:100%; padding:16px 24px; background:var(--clr-mint); color:var(--clr-dark); font-family:var(--font-ui); font-size:var(--t-sm); font-weight:700; letter-spacing:0.07em; text-transform:uppercase; border:2px solid var(--clr-mint); border-radius:var(--radius); transition:background 0.2s; text-decoration:none;" onmouseover="this.style.background='#0BC39F';" onmouseout="this.style.background='var(--clr-mint)';">
+          <!-- PayPal logo SVG -->
+          <svg width="80" height="20" viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <text x="0" y="15" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#003087">Pay</text>
+            <text x="24" y="15" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#009cde">Pal</text>
+          </svg>
+          Donate Now
+        </a>
+
+        <!-- Payment logos row -->
+        <div style="display:flex; align-items:center; gap:var(--sp-2);">
+          <!-- Visa -->
+          <div style="background:#fff; border-radius:4px; padding:3px 8px; display:flex; align-items:center; justify-content:center; height:26px;">
+            <svg width="44" height="14" viewBox="0 0 44 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <text x="0" y="12" font-family="Arial,sans-serif" font-size="13" font-weight="900" fill="#1a1f71" letter-spacing="1">VISA</text>
+            </svg>
+          </div>
+          <!-- Mastercard -->
+          <div style="background:#fff; border-radius:4px; padding:3px 8px; display:flex; align-items:center; gap:3px; height:26px;">
+            <svg width="14" height="14" viewBox="0 0 14 14"><circle cx="5" cy="7" r="5" fill="#EB001B"/><circle cx="9" cy="7" r="5" fill="#F79E1B" opacity="0.85"/></svg>
+            <span style="font-family:Arial,sans-serif; font-size:9px; font-weight:700; color:#333; letter-spacing:0.03em;">mastercard</span>
+          </div>
+          <!-- PayPal -->
+          <div style="background:#fff; border-radius:4px; padding:3px 8px; display:flex; align-items:center; height:26px;">
+            <span style="font-family:Arial,sans-serif; font-size:11px; font-weight:900; color:#003087;">Pay</span><span style="font-family:Arial,sans-serif; font-size:11px; font-weight:900; color:#009cde;">Pal</span>
+          </div>
+        </div>
+        <p style="font-family:var(--font-ui); font-size:var(--t-xs); color:rgba(255,255,255,0.4); text-align:center;">Secure payment &mdash; tax-deductible for US taxpayers</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SCHOLARSHIP FUND -->
+  <div class="section-wrap bg-alt" id="scholarships">
+    <div class="section-inner">
+      <span class="section-label">Scholarship Fund</span>
+      <div class="accent-line"></div>
+      <h2 class="section-title">Donate to Our Legal Defense and Scholarship Fund</h2>
+
+      <div class="impact-grid">
+        <div class="impact-card">
+          <div class="impact-number">1,500+</div>
+          <div class="impact-label">Participants Since 2008</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-number">51</div>
+          <div class="impact-label">Countries Represented</div>
+        </div>
+        <div class="impact-card">
+          <div class="impact-number">72</div>
+          <div class="impact-label">Scholarship Recipients Since 2020</div>
+        </div>
+      </div>
+
+      <div style="text-align:center; margin-top:var(--sp-2);">
+        <a href="https://www.paypal.com/donate?token=uW8lkkX7zyHDdbZoj-q9MUGNaRsv9YDO2rxcFVb_ZM35_HG9Hyp5yq_VsHly1Ojtmj82mGghcpyBC7oA" target="_blank" rel="noopener noreferrer" class="btn btn-solid btn-lg">Donate to Our Legal Defense and Scholarship Fund</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT THE EXCHANGE FOUNDATION -->
+  <div class="section-wrap" id="about" style="background:var(--clr-bg);">
+    <div class="section-inner">
+      <span class="section-label">About</span>
+      <div class="accent-line"></div>
+      <h2 class="section-title">About The Exchange Foundation</h2>
+
+      <p style="font-family:var(--font-body); font-size:var(--t-base); color:var(--clr-text-mid); line-height:1.8; margin-bottom:var(--sp-3);">In June 2008, only a few weeks after sustained violence across Lebanon led to a settlement known as the Doha Accords, we launched our first Beirut Exchange research conference. It was our belief at the time that Lebanon was in dire need of more direct and diversified understanding, especially for those who are studying the country, influencing public opinion and discourse, or shaping their own country&rsquo;s foreign policies. Given the current situation that finds Lebanon slipping from international focus even as its citizenry is immiserated further by the day, this is &mdash; regrettably &mdash; more true than ever.</p>
+
+      <p style="font-family:var(--font-body); font-size:var(--t-base); color:var(--clr-text-mid); line-height:1.8; margin-bottom:var(--sp-3);">In the years following the first Exchange, we steadily expanded our efforts, hosting more than 50 different Exchanges, including in Tunisia, Iraq, Syria and Turkey as well as on Libya and Yemen. Going into our 14th year, over 1,200 people from 51 different countries have now attended an Exchange, with many alumni returning in later years to join sessions once (or several times) again. <a href="https://www.globalpoliticalexchange.org/beirut" style="color:var(--clr-indigo); font-weight:600;">View the lineup of Speakers at the recently concluded 20th Beirut Exchange.</a></p>
+
+      <p style="font-family:var(--font-body); font-size:var(--t-base); color:var(--clr-text-mid); line-height:1.8; margin-bottom:var(--sp-3);">In 2020, in order to transparently organize and further professionalize our work, we were finally able to establish The Exchange as a US-registered not-for-profit, under the aegis of The Foundation for Global Political Exchange, with the mission of promoting professional and academic enrichment through a variety of small group, direct engagement conferences in Western Asia and North Africa.</p>
+
+      <p style="font-family:var(--font-body); font-size:var(--t-base); color:var(--clr-text-mid); line-height:1.8; margin-bottom:var(--sp-3);">Crucially &mdash; and since our beginning &mdash; all funding for the Exchange comes from only two sources: First, the participants who pay the participation fee and, second, scholarship recipients who benefit from individual, charitable contributions designed to broaden the social, political and geographic diversity of each Exchange table. As such, there is no government, commercial or non-profit support, an aspect that we believe provides a relatively independent platform for dialogue and understanding.</p>
+
+      <p style="font-family:var(--font-body); font-size:var(--t-base); color:var(--clr-text-mid); line-height:1.8; margin-bottom:var(--sp-3);">The Exchange Foundation is a New York State registered 501(c)3 charitable organization. Donations customarily support our Scholarship Fund for participants from around the world who will deepen the social, political and geographic diversity of the Exchange and who can demonstrate both financial need and a deep interest in the country where the Exchange takes place. All donations are tax-deductible for US taxpayers.</p>
+
+      <p style="font-family:var(--font-body); font-size:var(--t-base); color:var(--clr-text-mid); line-height:1.8;"><strong>Since 2020 72 students &mdash; from China, Peru, Brazil, Pakistan, Mexico, South Africa, Tunisia, Libya, Yemen and Lebanon (to name only a few countries) &mdash;</strong> have benefitted from our Exchange scholarships, allowing them to listen to, learn from and question leading intellectuals, activists and politicians representing an array of different points of view in a specific country. Our scholarship recipients have also expanded our own understanding of how states in the region are perceived beyond North America and Europe, leading to changes in the themes we explore and the speakers we seek out.</p>
+    </div>
+  </div>
+
+  <!-- YOUR IMPACT -->
+  <div class="section-wrap bg-alt" id="objectives">
+    <div class="section-inner">
+      <div class="accent-line"></div>
+      <h2 class="section-title">Your US Tax-Deductible Donation to The Exchange Foundation Can Help Us to Accomplish Several Other Critical Objectives Including:</h2>
+      <ul class="objectives-list">
+        <li><span>Expanding the number of scholarships, especially for students who are from the countries where an Exchange takes place;</span></li>
+        <li><span>Adding new countries in Western Asia and North Africa where we are able to organize an Exchange;</span></li>
+        <li><span>Finally holding an Exchange in the United States in order to expose participants from around the world to a deeper and more direct understanding of the challenges, internal conflicts and possibilities that Americans (and, inevitably, the rest of the globe) are increasingly facing.</span></li>
+      </ul>
+      <p style="font-family:var(--font-body); font-size:var(--t-lg); color:var(--clr-dark); font-style:italic; margin-top:var(--sp-5); margin-bottom:var(--sp-5);">Join us in building The Exchange over the coming months and years as we bring our unique learning approach to more people around the world!</p>
+      <div style="text-align:center;">
+        <a href="https://www.paypal.com/donate?token=uW8lkkX7zyHDdbZoj-q9MUGNaRsv9YDO2rxcFVb_ZM35_HG9Hyp5yq_VsHly1Ojtmj82mGghcpyBC7oA" target="_blank" rel="noopener noreferrer" class="btn btn-solid btn-lg">Donate Now</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials-section" id="testimonials">
+    <div class="section-inner">
+      <span class="section-label">What Participants Say</span>
+      <div class="accent-line"></div>
+      <h2 class="section-title">Testimonials</h2>
+      <div class="testimonial-grid">
+
+        <div class="testimonial-card">
+          <div><div class="testimonial-quote-mark">&ldquo;</div><blockquote>Illuminating and life changing experience. I will recall the Exchange as one of the most authentic educational experiences of my life.</blockquote></div>
+          <div class="testimonial-attribution">
+            <div class="avatar-placeholder"><img src="photos/sahar testimonial.avif" alt="Sahar Rizvi"></div>
+            <cite>Sahar Rizvi<br><span class="role">Masters Candidate</span></cite>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div><div class="testimonial-quote-mark">&ldquo;</div><blockquote>There could not exist a more thorough and intensive immersion into Lebanese history and politics than The Exchange.</blockquote></div>
+          <div class="testimonial-attribution">
+            <div class="avatar-placeholder"><img src="photos/nathan testimonial.png" alt="Nathan Wexler"></div>
+            <cite>Nathan Wexler<br><span class="role">PhD Candidate, UC Berkeley</span></cite>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div><div class="testimonial-quote-mark">&ldquo;</div><blockquote>Time-tested technique and tactful diplomacy enables The Exchange to achieve an environment conducive to attention, dialogue and reflection.</blockquote></div>
+          <div class="testimonial-attribution">
+            <div class="avatar-placeholder"><img src="photos/Jalel testimonial .png" alt="Dr. Jalel Harchaoui"></div>
+            <cite>Dr. Jalel Harchaoui<br><span class="role">Research Fellow, Conflict Research Unit, Clingendael Institute</span></cite>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <div class="newsletter">
+    <h2 class="section-title">Join Our Network</h2>
+    <p>Receive updates about The Exchange Foundation and upcoming Exchanges.</p>
+    <form class="newsletter-form" id="newsletter-form" onsubmit="handleSubscribe(event)">
+      <input type="email" placeholder="Your email address" />
+      <button type="submit">Subscribe</button>
+      </form>
+      <p id="newsletter-msg" style="display:none; font-family:var(--font-ui); font-size:var(--t-sm); color:var(--clr-mint); margin-top:var(--sp-2); font-weight:600;">Thank you! We'll be in touch soon.</p>
+      <p id="newsletter-err" style="display:none; font-family:var(--font-ui); font-size:var(--t-sm); color:#ff6b6b; margin-top:var(--sp-2);">Something went wrong. Please email us directly at info@globalpoliticalexchange.org</p>
+      <p id="newsletter-msg" style="display:none; font-family:var(--font-ui); font-size:var(--t-sm); color:var(--clr-mint); margin-top:var(--sp-2); font-weight:600;">Thank you! We'll be in touch soon.</p>
+      <p id="newsletter-err" style="display:none; font-family:var(--font-ui); font-size:var(--t-sm); color:#ff6b6b; margin-top:var(--sp-2);">Something went wrong. Please email us directly at info@globalpoliticalexchange.org</p>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="contact-section" id="contact">
+    <div class="section-inner">
+      <span class="section-label">Get In Touch</span>
+      <div class="accent-line" style="margin:0 auto 24px;"></div>
+      <h2 class="section-title">Contact Us</h2>
+      <div class="contact-info">
+        <p><strong>Email:</strong> <a href="mailto:info@globalpoliticalexchange.org">info@globalpoliticalexchange.org</a></p>
+        <p><strong>Co-founder Nicholas Noe:</strong> <a href="tel:+96181797943">+961.81.797.943</a> &nbsp;(Beirut/WhatsApp)</p>
+        <p style="margin-top:28px;">
+          <a href="https://www.paypal.com/donate?token=uW8lkkX7zyHDdbZoj-q9MUGNaRsv9YDO2rxcFVb_ZM35_HG9Hyp5yq_VsHly1Ojtmj82mGghcpyBC7oA" target="_blank" rel="noopener noreferrer" class="btn btn-solid">Donate to The Exchange Foundation</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <strong>Foundation for Global Political Exchange</strong>
+          Non-profit 501(c)3. Promoting direct engagement conferences in Western Asia &amp; North Africa since 2008.
+        </div>
+        <div class="footer-links">
+          <a href="https://www.globalpoliticalexchange.org/beirut">Beirut Exchange</a>
+          <a href="https://www.globalpoliticalexchange.org/tunis">Tunis Exchange</a>
+          <a href="https://www.globalpoliticalexchange.org/armenia">Armenia Exchange</a>
+          <a href="https://www.globalpoliticalexchange.org/team">Our Team</a>
+          <a href="https://www.globalpoliticalexchange.org/learn-arabic">Learn Arabic In Tunis</a>
+        </div>
+        <div>
+          <div class="footer-social">
+            <a href="https://www.facebook.com/groups/10975175535">Beirut EX Facebook</a>
+            <a href="https://www.facebook.com/groups/342217845855326">Tunis EX Facebook</a>
+            <a href="https://www.facebook.com/TheExchangeFoundation">The Exchange Facebook</a>
+            <a href="https://x.com/NoeNicholas" target="_blank" rel="noopener noreferrer">Twitter / X</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026, All rights reserved to The Foundation for Global Political Exchange non-profit 501(c)3</span>
+        <a href="mailto:info@globalpoliticalexchange.org">info@globalpoliticalexchange.org</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var sections = ['legal','donate-now','scholarships','about','objectives','testimonials'];
+      var navLinks = document.querySelectorAll('.page-nav a');
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            navLinks.forEach(function(a) { a.classList.remove('active'); });
+            var active = document.querySelector('.page-nav a[href="#' + entry.target.id + '"]');
+            if (active) active.classList.add('active');
+          }
+        });
+      }, { threshold: 0.2 });
+      sections.forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
+    });
+
+    function toggleMobileMenu() {
+      var btn = document.getElementById('burgerBtn');
+      var links = document.getElementById('navLinks');
+      var isOpen = links.classList.toggle('open');
+      btn.classList.toggle('open', isOpen);
+      btn.setAttribute('aria-expanded', String(isOpen));
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('#navLinks a').forEach(function(link) {
+        link.addEventListener('click', function() {
+          document.getElementById('navLinks').classList.remove('open');
+          var btn = document.getElementById('burgerBtn');
+          btn.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

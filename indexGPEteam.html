@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Team — Foundation for Global Political Exchange</title>
+  <link rel="icon" type="image/png" href="photos/GPE favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+
+    :root {
+      --clr-darkest:    #001B2B;
+      --clr-dark:       #023D59;
+      --clr-mid:        #05638C;
+      --clr-light:      #0A87BE;
+      --clr-cyan:       #10ABEF;
+      --clr-cyan-soft:  #82CFFE;
+      --clr-cyan-pale:  #D9F0FF;
+      --clr-indigo:     #103CEF;
+      --clr-mint:       #10EFC3;
+      --clr-mint-soft:  #0BC39F;
+      --clr-bg:         #ffffff;
+      --clr-bg-alt:     #F0F6FF;
+      --clr-text:       #191B1C;
+      --clr-text-mid:   #383B3D;
+      --clr-text-muted: #595F61;
+      --clr-border:     #C2C9CC;
+      --clr-border-lt:  #DDE2E6;
+
+      --t-xs:   0.75rem;
+      --t-sm:   0.875rem;
+      --t-base: 1rem;
+      --t-lg:   1.125rem;
+      --t-xl:   1.375rem;
+      --t-2xl:  1.75rem;
+      --t-3xl:  2.25rem;
+      --t-hero: 3rem;
+
+      --sp-1: 8px;  --sp-2: 16px; --sp-3: 24px; --sp-4: 32px;
+      --sp-5: 48px; --sp-6: 64px; --sp-7: 80px;
+
+      --max-w: 1080px;
+      --section-pad: var(--sp-7) var(--sp-5);
+      --radius: 4px;
+
+      --font-display: 'Noto Sans Display', Arial, sans-serif;
+      --font-ui:      'Inter', Arial, sans-serif;
+      --font-body:    Georgia, 'Times New Roman', serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    [id] { scroll-margin-top: 56px; }
+    body { font-family: var(--font-body); font-size: var(--t-base); color: var(--clr-text); background: var(--clr-bg); line-height: 1.7; }
+    h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.2; }
+    a { color: inherit; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img { display: block; max-width: 100%; }
+
+    /* TOP BAR */
+    .top-bar { background: var(--clr-darkest); color: var(--clr-cyan-pale); font-family: var(--font-ui); font-size: var(--t-xs); padding: 8px var(--sp-5); display: flex; justify-content: flex-end; align-items: center; gap: var(--sp-4); letter-spacing: 0.04em; }
+    .top-bar a { color: var(--clr-cyan-pale); transition: color 0.2s; }
+    .top-bar a:hover { color: var(--clr-cyan); text-decoration: none; }
+    .top-bar .top-divider { width: 1px; height: 12px; background: rgba(255,255,255,0.2); }
+
+    /* NAV */
+    nav { background: var(--clr-dark); padding: 0 var(--sp-5); position: relative; }
+    .nav-inner { display: flex; align-items: center; }
+    nav ul { list-style: none; display: flex; flex-wrap: wrap; }
+    nav ul li a { display: block; padding: 18px 14px; color: var(--clr-cyan-pale); font-family: var(--font-ui); font-size: var(--t-xs); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; transition: background 0.2s, color 0.2s; white-space: nowrap; }
+    nav ul li a:hover, nav ul li a.active { background: var(--clr-cyan); color: var(--clr-dark); text-decoration: none; }
+    .donate-link a { background: none; color: var(--clr-cyan-pale) !important; font-weight: 600; }
+    .burger { display: none; flex-direction: column; justify-content: center; gap: 6px; background: none; border: none; cursor: pointer; padding: 16px 4px; margin-left: auto; }
+    .burger span { display: block; width: 24px; height: 2px; background: var(--clr-cyan-pale); border-radius: 2px; transition: transform 0.28s ease, opacity 0.2s ease; }
+    .burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+    .burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+
+    /* PAGE NAV */
+    .page-nav { background: #fff; border-top: 3px solid var(--clr-cyan); border-bottom: 1px solid var(--clr-border-lt); padding: 0 var(--sp-5); display: flex; align-items: center; overflow-x: auto; scrollbar-width: none; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+    .page-nav::-webkit-scrollbar { display: none; }
+    .page-nav-inner { display: flex; align-items: center; max-width: var(--max-w); margin: 0 auto; width: 100%; }
+    .page-nav a { display: block; padding: 13px 18px; font-family: var(--font-ui); font-size: var(--t-xs); font-weight: 600; color: var(--clr-text-mid); letter-spacing: 0.04em; white-space: nowrap; text-decoration: none; border-bottom: 3px solid transparent; margin-bottom: -1px; transition: color 0.2s, border-color 0.2s; }
+    .page-nav a:hover { color: var(--clr-dark); border-bottom-color: var(--clr-cyan); text-decoration: none; }
+    .page-nav a.active { color: var(--clr-dark); border-bottom-color: var(--clr-cyan); font-weight: 700; }
+
+    /* HERO */
+    .hero { position: relative; overflow: hidden; color: #fff; background: var(--clr-dark); min-height: 320px; display: flex; align-items: center; justify-content: center; }
+    .hero-text-wrap { display: flex; align-items: center; justify-content: center; text-align: center; padding: var(--sp-6) var(--sp-5); width: 100%; }
+    .hero-inner { max-width: 820px; }
+    .hero .tagline { font-family: var(--font-ui); font-size: var(--t-xs); font-weight: 600; color: var(--clr-cyan); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: var(--sp-3); }
+    .hero h1 { font-size: var(--t-hero); font-weight: 700; line-height: 1.15; color: #fff; margin-bottom: var(--sp-4); text-shadow: 0 2px 20px rgba(0,0,0,0.4); }
+    .hero .cta-text { font-family: var(--font-ui); font-size: var(--t-sm); color: rgba(255,255,255,0.55); }
+    .hero .cta-text a { color: var(--clr-cyan-pale); border-bottom: 1px solid rgba(217,240,255,0.4); transition: color 0.2s; }
+    .hero .cta-text a:hover { color: var(--clr-cyan); text-decoration: none; }
+
+    .btn { display: inline-block; padding: 14px 32px; font-family: var(--font-ui); font-size: var(--t-sm); font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; border: 2px solid var(--clr-cyan); color: var(--clr-cyan); border-radius: var(--radius); transition: background 0.2s, color 0.2s, border-color 0.2s; }
+    .btn:hover { background: var(--clr-cyan); color: var(--clr-dark); text-decoration: none; }
+    .btn-solid { background: var(--clr-cyan); color: var(--clr-dark); }
+    .btn-solid:hover { background: var(--clr-cyan-soft); border-color: var(--clr-cyan-soft); }
+
+    /* NEWS TICKER */
+    .news-ticker { background: #F8F6F2; height: 38px; display: flex; align-items: stretch; overflow: hidden; position: relative; border-bottom: 1px solid var(--clr-border); }
+    .ticker-label { flex-shrink: 0; background: var(--clr-darkest); color: #fff; font-family: var(--font-ui); font-size: var(--t-xs); font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; margin-left: var(--sp-5); padding: 0 14px; display: flex; align-items: center; gap: 8px; z-index: 2; white-space: nowrap; }
+    .ticker-label::after { content: ''; position: absolute; left: calc(100% - 1px); top: 0; bottom: 0; width: 0; height: 0; border-top: 38px solid transparent; border-left: 14px solid var(--clr-darkest); }
+    .ticker-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--clr-mint); animation: blink 1.2s ease-in-out infinite; }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+    .ticker-track { flex: 1; overflow: hidden; display: flex; align-items: center; padding-left: 24px; mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%); }
+    .ticker-scroll { display: flex; align-items: center; white-space: nowrap; animation: ticker-move 28s linear infinite; }
+    .ticker-scroll:hover { animation-play-state: paused; }
+    @keyframes ticker-move { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .ticker-item { font-family: var(--font-ui); font-size: var(--t-sm); font-weight: 600; color: var(--clr-darkest); padding-right: 64px; }
+    .ticker-item a { color: var(--clr-darkest); border-bottom: 1px solid rgba(0,27,43,0.3); }
+    .ticker-item a:hover { color: var(--clr-dark); text-decoration: none; }
+    .ticker-sep { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: rgba(0,27,43,0.35); margin-right: 64px; vertical-align: middle; flex-shrink: 0; }
+
+    /* SECTION UTILITIES */
+    .section-wrap { padding: var(--section-pad); }
+    .section-inner { max-width: var(--max-w); margin: 0 auto; }
+    .section-label { font-family: var(--font-ui); font-size: var(--t-xs); font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--clr-cyan); margin-bottom: var(--sp-2); display: block; }
+    h2.section-title { font-size: var(--t-3xl); font-weight: 900; color: var(--clr-dark); margin-bottom: var(--sp-3); }
+    .accent-line { width: 48px; height: 3px; background: var(--clr-cyan); margin-bottom: var(--sp-4); border-radius: 2px; }
+    .bg-alt { background: var(--clr-bg-alt); }
+
+    /* TEAM MEMBER CARDS */
+    .team-grid { display: flex; flex-direction: column; gap: var(--sp-6); }
+    .team-member { padding-bottom: var(--sp-6); border-bottom: 1px solid var(--clr-border-lt); }
+    .team-member:last-child { border-bottom: none; padding-bottom: 0; }
+.team-info { display: flex; flex-direction: column; }
+    .team-name { font-family: var(--font-display); font-size: var(--t-2xl); font-weight: 900; color: var(--clr-dark); margin-bottom: 4px; }
+    .team-role-badge { display: inline-block; font-family: var(--font-ui); font-size: var(--t-xs); font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--clr-cyan); margin-bottom: var(--sp-2); }
+    .team-divider { width: 40px; height: 3px; background: var(--clr-cyan); border-radius: 2px; margin-bottom: var(--sp-3); }
+    .team-bio { font-family: var(--font-body); font-size: var(--t-base); color: var(--clr-text-mid); line-height: 1.85; }
+    .team-bio p { margin-bottom: var(--sp-2); }
+    .team-bio p:last-child { margin-bottom: 0; }
+
+    /* Honorary badge */
+    .honorary-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(16,171,239,0.08); border: 1px solid rgba(16,171,239,0.25); border-radius: 20px; padding: 4px 12px; font-family: var(--font-ui); font-size: var(--t-xs); font-weight: 700; color: var(--clr-indigo); letter-spacing: 0.08em; margin-bottom: var(--sp-2); }
+
+    /* NEWSLETTER */
+    .newsletter { background: linear-gradient(135deg, var(--clr-dark) 0%, var(--clr-mid) 100%); color: #fff; text-align: center; padding: var(--sp-7) var(--sp-5); }
+    .newsletter h2.section-title { color: #fff; margin-bottom: var(--sp-2); }
+    .newsletter p { color: var(--clr-cyan-pale); margin-bottom: var(--sp-4); font-family: var(--font-ui); font-size: var(--t-base); }
+    .newsletter-form { display: flex; gap: var(--sp-1); justify-content: center; flex-wrap: wrap; max-width: 480px; margin: 0 auto; }
+    .newsletter-form input[type="email"] { flex: 1; min-width: 220px; padding: 14px var(--sp-2); border: none; border-radius: var(--radius) 0 0 var(--radius); font-family: var(--font-ui); font-size: var(--t-sm); outline: none; }
+    .newsletter-form button { padding: 14px var(--sp-4); background: var(--clr-cyan); color: var(--clr-dark); border: none; border-radius: 0 var(--radius) var(--radius) 0; font-family: var(--font-ui); font-size: var(--t-xs); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+    .newsletter-form button:hover { background: var(--clr-cyan-soft); }
+
+    /* CONTACT */
+    .contact-section { background: var(--clr-bg); padding: var(--section-pad); text-align: center; }
+    .contact-section h2.section-title { margin-bottom: var(--sp-3); }
+    .contact-info { font-family: var(--font-ui); font-size: var(--t-base); color: var(--clr-text-mid); line-height: 2; }
+    .contact-info a { color: var(--clr-dark); font-weight: 600; }
+    .contact-info a:hover { color: var(--clr-cyan); }
+    .contact-info p { margin-bottom: var(--sp-2); }
+
+    /* FOOTER */
+    footer { background: var(--clr-dark); color: rgba(255,255,255,0.5); padding: var(--sp-5) var(--sp-5) var(--sp-4); font-family: var(--font-ui); font-size: var(--t-xs); }
+    .footer-inner { max-width: var(--max-w); margin: 0 auto; display: flex; flex-direction: column; gap: var(--sp-3); }
+    .footer-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: var(--sp-4); padding-bottom: var(--sp-3); border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .footer-brand { max-width: 340px; }
+    .footer-brand strong { display: block; font-size: var(--t-sm); color: rgba(255,255,255,0.85); font-weight: 700; margin-bottom: 6px; }
+    .footer-links { display: flex; flex-direction: column; gap: 6px; }
+    .footer-links a { color: rgba(255,255,255,0.55); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--clr-cyan); text-decoration: none; }
+    .footer-social { display: flex; gap: var(--sp-3); flex-wrap: wrap; }
+    .footer-social a { color: rgba(255,255,255,0.55); transition: color 0.2s; }
+    .footer-social a:hover { color: var(--clr-cyan); text-decoration: none; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--sp-2); font-size: var(--t-xs); color: rgba(255,255,255,0.35); }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      :root { --section-pad: 56px 32px; --t-hero: 2.4rem; }
+    }
+    @media (max-width: 640px) {
+      :root { --section-pad: 48px 20px; --t-hero: 2rem; --t-3xl: 1.75rem; }
+      .mc-w2 { grid-column: span 1; }
+      .hero-inner { max-width: 100%; }
+      .burger { display: flex; }
+      nav ul { display: none; flex-direction: column; width: 100%; background: var(--clr-dark); border-top: 1px solid rgba(255,255,255,0.08); }
+      nav ul.open { display: flex; }
+      nav ul li { width: 100%; }
+      nav ul li a { padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+      .top-bar { justify-content: center; flex-wrap: wrap; gap: var(--sp-2); }
+      .top-bar .top-divider { display: none; }
+      .newsletter-form input[type="email"], .newsletter-form button { border-radius: var(--radius); }
+      .footer-top { flex-direction: column; }
+      .page-nav { padding: 0 var(--sp-2); }
+      .page-nav a { padding: 12px 12px; font-size: 0.7rem; }
+    }
+    @media (min-width: 641px) { .burger { display: none !important; } }
+
+    .hero-image-wrap {
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+    }
+    .hero-image-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <a href="mailto:info@globalpoliticalexchange.org">info@globalpoliticalexchange.org</a>
+    <span class="top-divider"></span>
+    <a href="tel:+96181797943">+961.81.797.943</a>
+    <span class="top-divider"></span>
+    <a href="https://wa.me/96181797943">WhatsApp</a>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="nav-inner">
+      <ul id="navLinks">
+        <li><a href="https://www.globalpoliticalexchange.org/">Home</a></li>
+        <li><a href="https://www.globalpoliticalexchange.org/beirut">Beirut Exchange</a></li>
+        <li><a href="https://www.globalpoliticalexchange.org/tunis">Tunis Exchange</a></li>
+        <li><a href="https://www.globalpoliticalexchange.org/armenia">Armenia Exchange</a></li>
+        <li><a href="https://www.globalpoliticalexchange.org/libya">Libya Exchange</a></li>
+        <li><a href="https://www.globalpoliticalexchange.org/yemen">Yemen Exchange</a></li>
+        <li><a href="https://www.globalpoliticalexchange.org/erbil">Erbil Exchange</a></li>
+        <li><a href="https://www.globalpoliticalexchange.org/team" class="active">Our Team</a></li>
+        <li><a href="https://www.globalpoliticalexchange.org/learn-arabic">Learn Arabic In Tunis</a></li>
+        <li class="donate-link"><a href="https://www.globalpoliticalexchange.org/donate">Donate</a></li>
+      </ul>
+      <button class="burger" id="burgerBtn" onclick="toggleMobileMenu()" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-text-wrap">
+      <div class="hero-inner">
+        <img src="photos/Logo GPE.png" alt="The Exchange Foundation" style="height:90px; width:auto; margin:0 auto var(--sp-3); display:block; filter:invert(1); mix-blend-mode:screen; opacity:0.95;">
+        <p class="tagline">Foundation for Global Political Exchange</p>
+        <h1>Our Team</h1>
+        <p class="cta-text">Get in touch: <a href="mailto:info@globalpoliticalexchange.org">info@globalpoliticalexchange.org</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEWS TICKER -->
+  <div class="news-ticker">
+    <div class="ticker-label"><span class="ticker-dot"></span>Latest</div>
+    <div class="ticker-track">
+      <div class="ticker-scroll">
+        <span class="ticker-item"><a href="https://www.justsecurity.org/94412/talking-to-the-enemy-shouldnt-be-illegal/" target="_blank" rel="noopener noreferrer">&ldquo;Talking To &lsquo;The Enemy&rsquo; Shouldn&rsquo;t Be Illegal&rdquo;</a> &nbsp;&#183;&nbsp; Lawsuit Announcement</span>
+        <span class="ticker-sep"></span>
+        <span class="ticker-item"><a href="https://www.justsecurity.org/105426/treasury-reversal-sanctions-free-speech/" target="_blank" rel="noopener noreferrer">Treasury&rsquo;s Reversal on Sanctions Authority Is a Victory for Free Speech</a></span>
+        <span class="ticker-sep"></span>
+        <span class="ticker-item"><a href="https://www.justsecurity.org/94412/talking-to-the-enemy-shouldnt-be-illegal/" target="_blank" rel="noopener noreferrer">&ldquo;Talking To &lsquo;The Enemy&rsquo; Shouldn&rsquo;t Be Illegal&rdquo;</a> &nbsp;&#183;&nbsp; Lawsuit Announcement</span>
+        <span class="ticker-sep"></span>
+        <span class="ticker-item"><a href="https://www.justsecurity.org/105426/treasury-reversal-sanctions-free-speech/" target="_blank" rel="noopener noreferrer">Treasury&rsquo;s Reversal on Sanctions Authority Is a Victory for Free Speech</a></span>
+        <span class="ticker-sep"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEAM MEMBERS -->
+  <div class="section-wrap" style="background:var(--clr-bg);">
+    <div class="section-inner">
+      <span class="section-label">The People Behind The Exchange</span>
+      <div class="accent-line"></div>
+      <h2 class="section-title">Our Team</h2>
+
+      <div class="team-grid">
+
+        <!-- FAREA AL-MUSLIMI -->
+        <div class="team-member" id="farea">
+          <div class="team-info">
+            <h3 class="team-name">Farea Al-Muslimi</h3>
+            <div class="team-role-badge">Co-Director</div>
+            <div class="team-divider"></div>
+            <div class="team-bio">
+              <p>Chairman and co-founder of Sanaa Center for Strategic Studies and a non-resident fellow at both the Carnegie Middle East Center and Middle East Institute in Washington, D.C. Appointed to the UN Advisory Group of Experts for the Progress Study on Youth, Peace and Security (2016).</p>
+              <p>Published in Foreign Affairs, Foreign Policy, New York Times, The Independent, The Guardian, Al-Hayyat, As-Safir, Al-Monitor. Named to Foreign Policy&rsquo;s Top 100 Global Thinkers (2013) and The Guardian&rsquo;s Top 30 under 30 list (2014).</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- MONICA MARKS -->
+        <div class="team-member" id="monica">
+          <div class="team-info">
+            <h3 class="team-name">Monica Marks</h3>
+            <div class="team-role-badge">Co-Director</div>
+            <div class="team-divider"></div>
+            <div class="team-bio">
+              <p>Rhodes Scholar and PhD Candidate at Oxford University, and a doctoral fellow with the European Research Council&rsquo;s WAFAW program. Her work, which focuses on politics, institutional reform, and Islamist movements in Tunisia and Turkey, has appeared in peer-reviewed books and journals, news outlets including The Guardian, The New York Times, Foreign Policy, and The Washington Post, and for think tanks including the Carnegie Endowment, the Brookings Institute, and The Century Foundation.</p>
+              <p>A former Fulbright Scholar to Turkey, Ms. Marks has taught as a Visiting Professor in the Politics and International Relations Department of Istanbul&rsquo;s Bogazici University. Recently she has been a Visiting Fellow at Columbia University&rsquo;s SIPA school and at the London-based European Council on Foreign Relations (ECFR). She speaks Arabic and Turkish.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- NICHOLAS NOE -->
+        <div class="team-member" id="nicholas">
+          <div class="team-info">
+            <h3 class="team-name">Nicholas Noe</h3>
+            <div class="team-role-badge">Co-Founder &amp; Co-Director</div>
+            <div class="team-divider"></div>
+            <div class="team-bio">
+              <p>Political advisor for Centre for Humanitarian Dialogue in Geneva. Regional Organizing Director for Hillary Clinton&rsquo;s 2016 presidential campaign in Michigan. Has lived in Beirut (2004&ndash;present) and Tunis (2012&ndash;2014); co-editor of Heinrich Boell Foundation&rsquo;s Perspectives journal; co-founder of Mideastwire.com (2005&ndash;present). Provides analysis for Al-Jazeera International, BBC, US and European publications.</p>
+              <p>Author of White Paper &ldquo;Re-Imagining the Lebanon Track: Towards a New US Policy.&rdquo; Editor of the 2007 book &ldquo;Voice of Hezbollah: The Statements of Sayyid Hassan Nasrallah.&rdquo; Visiting fellow with European Council on Foreign Relations (2014). Graduate of Cambridge University (MPhil, International Relations, 2006); Magna Cum Laude, Phi Beta Kappa from Brown University (1999). Policy Fellowship at European University Institute in Florence (2020).</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SAFA BELGHITH -->
+        <div class="team-member" id="safa">
+          <div class="team-info">
+            <h3 class="team-name">Safa Belghith</h3>
+            <div class="team-role-badge">Team Member</div>
+            <div class="team-divider"></div>
+            <div class="team-bio">
+              <p>International Relations graduate from the Higher Institute of Human Sciences at Al-Manar University; degree in English Linguistics, Literature and Civilization from the University of Manouba. Freelance journalist and research consultant on Tunisian politics and women&rsquo;s rights.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ARTHUR QUESNAY -->
+        <div class="team-member" id="arthur">
+          <div class="team-info">
+            <h3 class="team-name">Arthur Quesnay</h3>
+            <div class="team-role-badge">Co-Director, Noria MENA Program</div>
+            <div class="team-divider"></div>
+            <div class="team-bio">
+              <p>Assistant Researcher and PhD Research Fellow in Political Science at the ERC-funded Sociology of Civil Wars program at the Panth&eacute;on-Sorbonne University (Paris 1) since 2015. He was previously (2010&ndash;2014) a Junior Research Fellow in Iraq at the Institut fran&ccedil;ais du Proche-Orient (IFPO). His doctoral thesis focuses on sectarian conflicts in Northern Iraq, where he conducted extensive fieldwork since 2009.</p>
+              <p>He has also conducted parallel fieldwork in Libya (2011&ndash;2012) and Syria (2012&ndash;2013 and 2016) with insurgent groups. Taken together, his work highlights social and political transformation through the Middle East Civil Wars. As co-director of Noria MENA Program, Mr. Quesnay calls for social scientists to adopt new methodological and conceptual approaches to understanding these extreme situations and for combining micro and macro analyses.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- YAMEN SOUKKARIEH -->
+        <div class="team-member" id="yamen">
+          <div class="team-info">
+            <h3 class="team-name">Yamen Soukkarieh</h3>
+            <div class="honorary-badge">&#9733; Honorary Board Member</div>
+            <div class="team-divider"></div>
+            <div class="team-bio">
+              <p>Communication Media Degree from Lebanese American University in Beirut (1999). Producer and cameraman for Lebanese and international media organizations including CNN, Arte, and Al-Jazeera.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- NEWSLETTER -->
+  <div class="newsletter">
+    <h2 class="section-title">Join Our Network</h2>
+    <p>Receive updates about The Exchange Foundation and upcoming Exchanges.</p>
+    <form class="newsletter-form" id="newsletter-form" onsubmit="handleSubscribe(event)">
+      <input type="email" placeholder="Your email address" />
+      <button type="submit">Subscribe</button>
+      </form>
+      <p id="newsletter-msg" style="display:none; font-family:var(--font-ui); font-size:var(--t-sm); color:var(--clr-mint); margin-top:var(--sp-2); font-weight:600;">Thank you! We'll be in touch soon.</p>
+      <p id="newsletter-err" style="display:none; font-family:var(--font-ui); font-size:var(--t-sm); color:#ff6b6b; margin-top:var(--sp-2);">Something went wrong. Please email us directly at info@globalpoliticalexchange.org</p>
+      <p id="newsletter-msg" style="display:none; font-family:var(--font-ui); font-size:var(--t-sm); color:var(--clr-mint); margin-top:var(--sp-2); font-weight:600;">Thank you! We'll be in touch soon.</p>
+      <p id="newsletter-err" style="display:none; font-family:var(--font-ui); font-size:var(--t-sm); color:#ff6b6b; margin-top:var(--sp-2);">Something went wrong. Please email us directly at info@globalpoliticalexchange.org</p>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="contact-section" id="contact">
+    <div class="section-inner">
+      <span class="section-label">Get In Touch</span>
+      <div class="accent-line" style="margin:0 auto 24px;"></div>
+      <h2 class="section-title">Contact Us</h2>
+      <div class="contact-info">
+        <p><strong>Email:</strong> <a href="mailto:info@globalpoliticalexchange.org">info@globalpoliticalexchange.org</a></p>
+        <p><strong>Co-founder Nicholas Noe:</strong> <a href="tel:+96181797943">+961.81.797.943</a> &nbsp;(Beirut/WhatsApp)</p>
+        <p style="margin-top:28px;"><a href="https://www.globalpoliticalexchange.org/donate" class="btn btn-solid">Donate to The Exchange Foundation</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <strong>Foundation for Global Political Exchange</strong>
+          Non-profit 501(c)3. Promoting direct engagement conferences in Western Asia &amp; North Africa since 2008.
+        </div>
+        <div class="footer-links">
+          <a href="https://www.globalpoliticalexchange.org/beirut">Beirut Exchange</a>
+          <a href="https://www.globalpoliticalexchange.org/tunis">Tunis Exchange</a>
+          <a href="https://www.globalpoliticalexchange.org/armenia">Armenia Exchange</a>
+          <a href="https://www.globalpoliticalexchange.org/team">Our Team</a>
+          <a href="https://www.globalpoliticalexchange.org/learn-arabic">Learn Arabic In Tunis</a>
+        </div>
+        <div>
+          <div class="footer-social">
+            <a href="https://www.facebook.com/groups/10975175535">Beirut EX Facebook</a>
+            <a href="https://www.facebook.com/groups/342217845855326">Tunis EX Facebook</a>
+            <a href="https://www.facebook.com/TheExchangeFoundation">The Exchange Facebook</a>
+            <a href="https://x.com/NoeNicholas" target="_blank" rel="noopener noreferrer">Twitter / X</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026, All rights reserved to The Foundation for Global Political Exchange non-profit 501(c)3</span>
+        <a href="mailto:info@globalpoliticalexchange.org">info@globalpoliticalexchange.org</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var sections = ['farea','monica','nicholas','safa','arthur','yamen','contact'];
+      var navLinks = document.querySelectorAll('.page-nav a');
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            navLinks.forEach(function(a) { a.classList.remove('active'); });
+            var active = document.querySelector('.page-nav a[href="#' + entry.target.id + '"]');
+            if (active) active.classList.add('active');
+          }
+        });
+      }, { threshold: 0.3 });
+      sections.forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
+    });
+
+    function toggleMobileMenu() {
+      var btn = document.getElementById('burgerBtn');
+      var links = document.getElementById('navLinks');
+      var isOpen = links.classList.toggle('open');
+      btn.classList.toggle('open', isOpen);
+      btn.setAttribute('aria-expanded', String(isOpen));
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('#navLinks a').forEach(function(link) {
+        link.addEventListener('click', function() {
+          document.getElementById('navLinks').classList.remove('open');
+          var btn = document.getElementById('burgerBtn');
+          btn.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
