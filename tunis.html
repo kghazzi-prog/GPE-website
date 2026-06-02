@@ -742,13 +742,11 @@
     <h2 class="section-title">Join Our Network</h2>
     <p>Receive updates about The Exchange Foundation and upcoming Exchanges.</p>
     <form class="newsletter-form" id="newsletter-form" onsubmit="handleSubscribe(event)">
-      <input type="email" placeholder="Your email address" />
+      <input type="email" name="email" placeholder="Your email address" required />
       <button type="submit">Subscribe</button>
-      </form>
-      <p id="newsletter-msg" style="display:none; font-family:var(--font-ui); font-size:var(--t-sm); color:var(--clr-mint); margin-top:var(--sp-2); font-weight:600;">Thank you! We'll be in touch soon.</p>
-      <p id="newsletter-err" style="display:none; font-family:var(--font-ui); font-size:var(--t-sm); color:#ff6b6b; margin-top:var(--sp-2);">Something went wrong. Please email us directly at info@globalpoliticalexchange.org</p>
-      <p id="newsletter-msg" style="display:none; font-family:var(--font-ui); font-size:var(--t-sm); color:var(--clr-mint); margin-top:var(--sp-2); font-weight:600;">Thank you! We'll be in touch soon.</p>
-      <p id="newsletter-err" style="display:none; font-family:var(--font-ui); font-size:var(--t-sm); color:#ff6b6b; margin-top:var(--sp-2);">Something went wrong. Please email us directly at info@globalpoliticalexchange.org</p>
+    </form>
+    <p id="newsletter-msg" style="display:none; font-family:var(--font-ui); font-size:var(--t-sm); color:var(--clr-mint); margin-top:var(--sp-2); font-weight:600;">Thank you! We'll be in touch soon.</p>
+    <p id="newsletter-err" style="display:none; font-family:var(--font-ui); font-size:var(--t-sm); color:#ff6b6b; margin-top:var(--sp-2);">Something went wrong. Please email us directly at info@globalpoliticalexchange.org</p>
   </div>
 
   <!-- CONTACT -->
@@ -819,6 +817,21 @@
       var expanded = btn.getAttribute('aria-expanded') === 'true';
       btn.setAttribute('aria-expanded', String(!expanded));
       btn.nextElementSibling.classList.toggle('open', !expanded);
+    }
+
+    function handleSubscribe(e) {
+      e.preventDefault();
+      var form = e.target;
+      var msg = document.getElementById('newsletter-msg');
+      var err = document.getElementById('newsletter-err');
+      fetch('https://formspree.io/f/xgoqkwyo', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      }).then(function(res) {
+        if (res.ok) { form.reset(); msg.style.display = 'block'; err.style.display = 'none'; }
+        else { err.style.display = 'block'; msg.style.display = 'none'; }
+      }).catch(function() { err.style.display = 'block'; msg.style.display = 'none'; });
     }
 
     function toggleMobileMenu() {

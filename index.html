@@ -300,8 +300,9 @@
       font-size: var(--t-base);
       color: var(--clr-text-mid);
       line-height: 1.8;
-      margin: 0;
+      margin: 0 0 1.8em;
     }
+    .feature-body p:last-child { margin-bottom: 0; }
 
     /* ─────────────────────────────────────────
        ACCORDIONS — chevron icon, better spacing
@@ -1146,24 +1147,6 @@
     </div>
   </nav>
 
-  <!-- HERO IMAGE -->
-  <div class="hero-image-wrap">
-    <img src="photos/Exchange background photo mosaic.jpg" alt="The Exchange Foundation">
-  </div>
-
-  <!-- HERO -->
-  <div class="hero">
-    <div class="hero-text-wrap">
-      <div class="hero-inner">
-        <img src="photos/Logo GPE.png" alt="The Exchange Foundation" style="height:90px; width:auto; margin:0 auto var(--sp-3); display:block; filter:invert(1); mix-blend-mode:screen; opacity:0.95;">
-        <p class="tagline">Foundation for Global Political Exchange</p>
-        <h1>Promoting professional and academic enrichment through direct engagement conferences in Western Asia &amp; North Africa</h1>
-        <p class="cta-text">Support our work: <a href="https://www.globalpoliticalexchange.org/donate">Donate to The Exchange Foundation</a></p>
-      </div>
-    </div>
-
-  </div>
-
   <!-- NEWS TICKER -->
   <div class="news-ticker">
     <div class="ticker-label">
@@ -1184,6 +1167,24 @@
         <span class="ticker-sep"></span>
       </div>
     </div>
+  </div>
+
+  <!-- HERO IMAGE -->
+  <div class="hero-image-wrap">
+    <img src="photos/Exchange background photo mosaic.jpg" alt="The Exchange Foundation">
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-text-wrap">
+      <div class="hero-inner">
+        <img src="photos/Logo GPE.png" alt="The Exchange Foundation" style="height:90px; width:auto; margin:0 auto var(--sp-3); display:block; filter:invert(1); mix-blend-mode:screen; opacity:0.95;">
+        <p class="tagline">Foundation for Global Political Exchange</p>
+        <h1>Promoting professional and academic enrichment through direct engagement conferences in Western Asia &amp; North Africa</h1>
+        <p class="cta-text">Support our work: <a href="https://www.globalpoliticalexchange.org/donate">Donate to The Exchange Foundation</a></p>
+      </div>
+    </div>
+
   </div>
 
   <!-- FEATURE SPLIT -->
@@ -1501,13 +1502,11 @@
     <h2 class="section-title">Join Our Network</h2>
     <p>Receive updates about The Exchange Foundation and upcoming Exchanges.</p>
     <form class="newsletter-form" id="newsletter-form" onsubmit="handleSubscribe(event)">
-      <input type="email" placeholder="Your email address" />
+      <input type="email" name="email" placeholder="Your email address" required />
       <button type="submit">Subscribe</button>
-      </form>
-      <p id="newsletter-msg" style="display:none; font-family:var(--font-ui); font-size:var(--t-sm); color:var(--clr-mint); margin-top:var(--sp-2); font-weight:600;">Thank you! We'll be in touch soon.</p>
-      <p id="newsletter-err" style="display:none; font-family:var(--font-ui); font-size:var(--t-sm); color:#ff6b6b; margin-top:var(--sp-2);">Something went wrong. Please email us directly at info@globalpoliticalexchange.org</p>
-      <p id="newsletter-msg" style="display:none; font-family:var(--font-ui); font-size:var(--t-sm); color:var(--clr-mint); margin-top:var(--sp-2); font-weight:600;">Thank you! We'll be in touch soon.</p>
-      <p id="newsletter-err" style="display:none; font-family:var(--font-ui); font-size:var(--t-sm); color:#ff6b6b; margin-top:var(--sp-2);">Something went wrong. Please email us directly at info@globalpoliticalexchange.org</p>
+    </form>
+    <p id="newsletter-msg" style="display:none; font-family:var(--font-ui); font-size:var(--t-sm); color:var(--clr-mint); margin-top:var(--sp-2); font-weight:600;">Thank you! We'll be in touch soon.</p>
+    <p id="newsletter-err" style="display:none; font-family:var(--font-ui); font-size:var(--t-sm); color:#ff6b6b; margin-top:var(--sp-2);">Something went wrong. Please email us directly at info@globalpoliticalexchange.org</p>
   </div>
 
   <!-- CONTACT -->
@@ -1579,6 +1578,21 @@
       var expanded = btn.getAttribute('aria-expanded') === 'true';
       btn.setAttribute('aria-expanded', String(!expanded));
       btn.nextElementSibling.classList.toggle('open', !expanded);
+    }
+
+    function handleSubscribe(e) {
+      e.preventDefault();
+      var form = e.target;
+      var msg = document.getElementById('newsletter-msg');
+      var err = document.getElementById('newsletter-err');
+      fetch('https://formspree.io/f/xgoqkwyo', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      }).then(function(res) {
+        if (res.ok) { form.reset(); msg.style.display = 'block'; err.style.display = 'none'; }
+        else { err.style.display = 'block'; msg.style.display = 'none'; }
+      }).catch(function() { err.style.display = 'block'; msg.style.display = 'none'; });
     }
 
     function toggleMobileMenu() {

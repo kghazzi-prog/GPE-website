@@ -437,7 +437,7 @@
       overflow: hidden;
       transition: max-height 0.45s ease;
     }
-    .accordion-body.open { max-height: 900px; }
+    .accordion-body.open { max-height: 1400px; }
     .accordion-body-inner {
       max-width: var(--max-w);
       margin: 0 auto;
@@ -1292,7 +1292,10 @@
           <p>The 23rd Beirut Exchange will take place June 8&ndash;15, 2026, in partnership with Badil &mdash; The Alternative Policy Institute (API). This edition brings together NGO practitioners, foreign diplomats, researchers, journalists and engaged professionals for an intensive, small-group immersion into Lebanon&rsquo;s social, political and economic landscape.</p>
           <p>Over eight days, participants will meet and engage directly with leading scholars, politicians, civil society actors and activists representing a broad spectrum of perspectives on Lebanon. Sessions are designed to foster candid, off-the-record dialogue that goes well beyond what traditional conferences or academic courses can offer.</p>
           <p>Application Deadline I is April 30, 2026, with rolling acceptance thereafter. Scholarships are available to broaden the geographic and professional diversity of participants. All funding comes exclusively from participation fees and individual charitable contributions &mdash; no government or institutional sponsorship.</p>
-          <p style="margin-top: var(--sp-3);"><a href="#" class="btn btn-solid">Apply Now</a></p>
+          <p style="margin-top: var(--sp-3);"><a href="https://forms.gle/STahxMYTKCqcXeSF8" target="_blank" rel="noopener noreferrer" class="btn btn-solid">Apply Now</a></p>
+          <div style="margin-top: var(--sp-4); position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 10px;">
+            <iframe src="https://www.youtube.com/embed/bFK5Wj221u0" title="The 23rd Beirut Exchange" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+          </div>
         </div>
       </div>
     </div>
@@ -1744,13 +1747,11 @@
     <h2 class="section-title">Join Our Network</h2>
     <p>Receive updates about The Exchange Foundation and upcoming Exchanges.</p>
     <form class="newsletter-form" id="newsletter-form" onsubmit="handleSubscribe(event)">
-      <input type="email" placeholder="Your email address" />
+      <input type="email" name="email" placeholder="Your email address" required />
       <button type="submit">Subscribe</button>
-      </form>
-      <p id="newsletter-msg" style="display:none; font-family:var(--font-ui); font-size:var(--t-sm); color:var(--clr-mint); margin-top:var(--sp-2); font-weight:600;">Thank you! We'll be in touch soon.</p>
-      <p id="newsletter-err" style="display:none; font-family:var(--font-ui); font-size:var(--t-sm); color:#ff6b6b; margin-top:var(--sp-2);">Something went wrong. Please email us directly at info@globalpoliticalexchange.org</p>
-      <p id="newsletter-msg" style="display:none; font-family:var(--font-ui); font-size:var(--t-sm); color:var(--clr-mint); margin-top:var(--sp-2); font-weight:600;">Thank you! We'll be in touch soon.</p>
-      <p id="newsletter-err" style="display:none; font-family:var(--font-ui); font-size:var(--t-sm); color:#ff6b6b; margin-top:var(--sp-2);">Something went wrong. Please email us directly at info@globalpoliticalexchange.org</p>
+    </form>
+    <p id="newsletter-msg" style="display:none; font-family:var(--font-ui); font-size:var(--t-sm); color:var(--clr-mint); margin-top:var(--sp-2); font-weight:600;">Thank you! We'll be in touch soon.</p>
+    <p id="newsletter-err" style="display:none; font-family:var(--font-ui); font-size:var(--t-sm); color:#ff6b6b; margin-top:var(--sp-2);">Something went wrong. Please email us directly at info@globalpoliticalexchange.org</p>
   </div>
 
   <!-- CONTACT -->
@@ -1822,6 +1823,21 @@
       var expanded = btn.getAttribute('aria-expanded') === 'true';
       btn.setAttribute('aria-expanded', String(!expanded));
       btn.nextElementSibling.classList.toggle('open', !expanded);
+    }
+
+    function handleSubscribe(e) {
+      e.preventDefault();
+      var form = e.target;
+      var msg = document.getElementById('newsletter-msg');
+      var err = document.getElementById('newsletter-err');
+      fetch('https://formspree.io/f/xgoqkwyo', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      }).then(function(res) {
+        if (res.ok) { form.reset(); msg.style.display = 'block'; err.style.display = 'none'; }
+        else { err.style.display = 'block'; msg.style.display = 'none'; }
+      }).catch(function() { err.style.display = 'block'; msg.style.display = 'none'; });
     }
 
     function toggleMobileMenu() {
